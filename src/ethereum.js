@@ -12,7 +12,7 @@ const getMultisigWallet = () =>
       provider = new ethers.providers.Web3Provider(provider);
       const signer = provider.getSigner();
       const multisigWallet = new Contract(
-        '0x5fc8d32690cc91d4c39d9d3abcbd16989f875707',
+        '0xd992B20033a6232caAb8049e02DED8b281053d5a',
         Wallet.abi,
         signer
       );
