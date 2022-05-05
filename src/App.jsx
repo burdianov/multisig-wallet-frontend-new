@@ -13,6 +13,7 @@ function App() {
   const [approvers, setApprovers] = useState([]);
   const [quorum, setQuorum] = useState(undefined);
   const [transfers, setTransfers] = useState([]);
+  const [approvals, setApprovals] = useState([]);
 
   useEffect(() => {
     const init = async () => {
@@ -25,9 +26,11 @@ function App() {
       setApprovers(await multisigWallet.getApprovers());
       setQuorum((await multisigWallet.quorum()).toString());
       setTransfers(await multisigWallet.getTransfers());
+      accounts &&
+        setApprovals(await multisigWallet.getApprovalsByApprover(accounts[0]));
     };
     init();
-  }, []);
+  }, [accounts]);
 
   const createTransfer = async (transfer) => {
     await wallet.createTransfer(transfer.amount, transfer.to, {
@@ -43,6 +46,11 @@ function App() {
 
     const transfers = await wallet.getTransfers();
     setTransfers(transfers);
+
+    const approvalsByApprover = await wallet.getApprovalsByApprover(
+      accounts[0]
+    );
+    setApprovals(approvalsByApprover);
   };
 
   if (
@@ -56,10 +64,13 @@ function App() {
 
   return (
     <div>
-      <h2>Multisig Dapp</h2>
       <Header approvers={approvers} quorum={quorum} />
       <NewTransfer createTransfer={createTransfer} />
-      <TransferList transfers={transfers} approveTransfer={approveTransfer} />
+      <TransferList
+        transfers={transfers}
+        approveTransfer={approveTransfer}
+        approvals={approvals}
+      />
     </div>
   );
 }
