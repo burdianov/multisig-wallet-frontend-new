@@ -8,11 +8,12 @@ const getMultisigWallet = () =>
     let provider = await detectEthereumProvider();
     if (provider) {
       await provider.request({ method: 'eth_requestAccounts' });
-      // const networkId = await provider.request({ method: 'net_version' });
       provider = new ethers.providers.Web3Provider(provider);
       const signer = provider.getSigner();
       const multisigWallet = new Contract(
+        // hardhat
         // '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+        // rinkeby
         '0xd992B20033a6232caAb8049e02DED8b281053d5a',
         Wallet.abi,
         signer
