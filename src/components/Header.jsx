@@ -9,7 +9,7 @@ const Header = ({ approvers, quorum }) => {
           size={24}
           className='hover:-rotate-6 transition hover:cursor-pointer'
         />
-        <h2 className='ml-4 text-lg font-bold'>Multisig Dapp</h2>
+        <h2 className='ml-4 text-sm font-bold'>Multisig Dapp</h2>
       </div>
       <div className='ml-4 flex'>
         <p className='text-xs font-thin'>
