@@ -2,7 +2,7 @@ import { FaWallet } from 'react-icons/fa';
 
 const Header = ({ approvers, quorum }) => {
   return (
-    <header className='flex px-8 py-2 text-gray-800 align-middle flex-row justify-between bg-green-400 shadow-md'>
+    <header className='flex px-8 py-2 text-gray-800 align-middle flex-row justify-between bg-green-400 shadow-md fixed left-0 top-0 w-screen'>
       <div className='flex flex-row justify-start items-center w-1/6'>
         <FaWallet
           fill='#333333'

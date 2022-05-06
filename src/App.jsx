@@ -3,6 +3,8 @@ import { ethers } from 'ethers';
 
 import getMultisigWallet from './ethereum';
 
+import Loader from './utils/svg/Infinity-1s-200px.svg?component';
+
 import Header from './components/Header';
 import NewTransfer from './components/NewTransfer';
 import TransferList from './components/TransferList';
@@ -59,7 +61,11 @@ function App() {
     approvers.length === 0 ||
     typeof quorum === 'undefined'
   ) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex w-screen h-screen absolute left-0 top-0 bg-white justify-center items-center'>
+        <Loader />
+      </div>
+    );
   }
 
   return (
