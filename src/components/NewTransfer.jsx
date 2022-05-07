@@ -14,6 +14,8 @@ function NewTransfer({ createTransfer }) {
   const submit = (e) => {
     e.preventDefault();
 
+    console.log({ transfer });
+
     if (!transfer || !!transfer.amount || !!transfer.to) {
       toast('The fields cannot be empty', {
         autoClose: 1000
