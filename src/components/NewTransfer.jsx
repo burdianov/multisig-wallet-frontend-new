@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
+import Processing from '../utils/svg/processing.svg?component';
+
 import 'react-toastify/dist/ReactToastify.css';
 
-function NewTransfer({ createTransfer }) {
+function NewTransfer({ createTransfer, loadingCreate }) {
   const [transfer, setTransfer] = useState(undefined);
+
+  console.log({ loadingCreate });
 
   const updateTransfer = (e, field) => {
     const value = e.target.value;
@@ -60,43 +64,25 @@ function NewTransfer({ createTransfer }) {
         </div>
 
         <div className='w-full px-4 pb-2 m-auto text-gray-500 md:w-1/3'>
-          <button
-            type='submit'
-            className='py-2 px-4 bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg '
-          >
-            Submit
-          </button>
+          {!loadingCreate ? (
+            <button
+              type='submit'
+              className='px-4 py-2 inline-flex items-center  font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150'
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              type='button'
+              className='px-4 py-2 inline-flex items-center  font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed'
+              disabled=''
+            >
+              <Processing /> Processing...
+            </button>
+          )}
         </div>
       </form>
     </div>
-    // <div className='m-4 p-4 border-[1px] rounded'>
-    //   <h2>Create Transfer</h2>
-    //   <form onSubmit={submit}>
-    //     <div>
-    //       <label htmlFor='amount'>Amount</label>
-    //       <input
-    //         className='ml-4 border-[1px] rounded p-2'
-    //         type='text'
-    //         id='amount'
-    //         onChange={(e) => updateTransfer(e, 'amount')}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor='to'>To</label>
-    //       <input
-    //         className='ml-4 border-[1px] rounded p-2'
-    //         type='text'
-    //         id='to'
-    //         onChange={(e) => updateTransfer(e, 'to')}
-    //       />
-    //     </div>
-    //     <div>
-    //       <button className='px-4 py-2 bg-green-500 hover:bg-green-600 rounded active:bg-green-400 transition hover:text-white'>
-    //         Submit
-    //       </button>
-    //     </div>
-    //   </form>
-    // </div>
   );
 }
 

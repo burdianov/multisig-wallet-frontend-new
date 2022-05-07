@@ -34,7 +34,7 @@ function App() {
         setApprovals(await multisigWallet.getApprovalsByApprover(accounts[0]));
     };
     init();
-  }, [accounts]);
+  }, []);
 
   const createTransfer = async (transfer) => {
     const tx = await wallet.createTransfer(transfer.amount, transfer.to, {
@@ -85,11 +85,15 @@ function App() {
   return (
     <div>
       <Header approvers={approvers} quorum={quorum} />
-      <NewTransfer createTransfer={createTransfer} />
+      <NewTransfer
+        createTransfer={createTransfer}
+        loadingCreate={loadingCreate}
+      />
       <TransferList
         transfers={transfers}
         approveTransfer={approveTransfer}
         approvals={approvals}
+        loadingApprove={loadingApprove}
       />
     </div>
   );
