@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function NewTransfer({ createTransfer, loadingCreate }) {
   const [transfer, setTransfer] = useState(undefined);
 
+  console.log(<Processing />);
+
   const updateTransfer = (e, field) => {
     const value = e.target.value;
     setTransfer({ ...transfer, [field]: value });
