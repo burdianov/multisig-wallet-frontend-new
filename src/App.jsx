@@ -35,16 +35,20 @@ function App() {
   }, [accounts]);
 
   const createTransfer = async (transfer) => {
-    await wallet.createTransfer(transfer.amount, transfer.to, {
+    const tx = await wallet.createTransfer(transfer.amount, transfer.to, {
       from: accounts[0]
     });
+
+    await tx.wait();
 
     const transfers = await wallet.getTransfers();
     setTransfers(transfers);
   };
 
   const approveTransfer = async (transferId) => {
-    await wallet.approveTransfer(transferId, { from: accounts[0] });
+    const tx = await wallet.approveTransfer(transferId, { from: accounts[0] });
+
+    await tx.wait();
 
     const transfers = await wallet.getTransfers();
     setTransfers(transfers);
