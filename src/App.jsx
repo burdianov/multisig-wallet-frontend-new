@@ -16,6 +16,8 @@ function App() {
   const [quorum, setQuorum] = useState(undefined);
   const [transfers, setTransfers] = useState([]);
   const [approvals, setApprovals] = useState([]);
+  const [loadingCreate, setLoadingCreate] = useState(false);
+  const [loadingApprove, setLoadingApprove] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -39,7 +41,11 @@ function App() {
       from: accounts[0]
     });
 
+    setLoadingCreate(true);
+
     await tx.wait();
+
+    setLoadingCreate(false);
 
     const transfers = await wallet.getTransfers();
     setTransfers(transfers);
@@ -48,7 +54,11 @@ function App() {
   const approveTransfer = async (transferId) => {
     const tx = await wallet.approveTransfer(transferId, { from: accounts[0] });
 
+    setLoadingApprove(true);
+
     await tx.wait();
+
+    setLoadingApprove(false);
 
     const transfers = await wallet.getTransfers();
     setTransfers(transfers);
